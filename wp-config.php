@@ -22,17 +22,6 @@
  * @package WordPress
  */
 
-//Using environment variables for memory limits
-$wp_memory_limit = (getenv('WP_MEMORY_LIMIT') && preg_match("/^[0-9]+M$/", getenv('WP_MEMORY_LIMIT'))) ? getenv('WP_MEMORY_LIMIT') : '128M';
-$wp_max_memory_limit = (getenv('WP_MAX_MEMORY_LIMIT') && preg_match("/^[0-9]+M$/", getenv('WP_MAX_MEMORY_LIMIT'))) ? getenv('WP_MAX_MEMORY_LIMIT') : '256M';
-
-/** General WordPress memory limit for PHP scripts*/
-define('WP_MEMORY_LIMIT', $wp_memory_limit );
-
-/** WordPress memory limit for Admin panel scripts */
-define('WP_MAX_MEMORY_LIMIT', $wp_max_memory_limit );
-
-
 //Using environment variables for DB connection information
 
 // ** Database settings - You can get this info from your web host ** //
@@ -40,7 +29,6 @@ $connectstr_dbhost = getenv('AZURE_MYSQL_HOST');
 $connectstr_dbname = getenv('AZURE_MYSQL_DBNAME');
 $connectstr_dbusername = getenv('AZURE_MYSQL_USERNAME');
 $connectstr_dbpassword = getenv('AZURE_MYSQL_PASSWORD');
-//$connectstr_dbflag = getenv('AZURE_MYSQL_FLAG');
 
 /** The name of the database for WordPress */
 define('DB_NAME', $connectstr_dbname);
@@ -60,12 +48,6 @@ define( 'DB_CHARSET', 'utf8' );
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
-// /** Enabling support for connecting external MYSQL over SSL*/
-// $mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
-// if (strtolower($mysql_sslconnect) != 'false' && !is_numeric(strpos($connectstr_dbhost, "127.0.0.1")) && !is_numeric(strpos(strtolower($connectstr_dbhost), "localhost"))) {
-// 	define('MYSQL_CLIENT_FLAGS', $connectstr_dbflag);
-// }
-
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -76,14 +58,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'WP [gxsO-O{%v,;rs$Xu}836Iwns|o312/P}VN:Oyk+_so+-:Q{2ei^V*^|0P _A');
-define('SECURE_AUTH_KEY',  'N<;IO4?3JD>vui%gfqAJhgFs K+?y4KsVw!v+>Z]&;Qll266ri[4+)pGET)6>+^9');
-define('LOGGED_IN_KEY',    '0Ir)(nN;luF;<pCwanV+.(e-9*}t;fvCp|e|,Mn;aO1w.zovBm4s@q&Ss]Mv)er.');
-define('NONCE_KEY',        'YL(qS44[|h.U5~P,-Dve2`.k{_XGLjwdN|${i+<C~.xjV2oe$)T1+5O G<5>T(UR');
-define('AUTH_SALT',        '+loxj{rXpv6|^4un8wH(Xdj7;7or[KBos1Fn)yXs^%o+/b+w@v-Xqv!@FDJ/Wm[T');
-define('SECURE_AUTH_SALT', '#Vn(y[_),8j-av5N#G.)]s#TbzhKd)jIlrv]kJAYUi^7GmhjGT91m=z2ZcJUZU-)');
-define('LOGGED_IN_SALT',   'spnaBE+do MBktP:D]ux@]oxI#8).W}9*ocsIp*}UPuneT}5.;f+cb>^@.;Lb( u');
-define('NONCE_SALT',       'q(@TiVF+,OoI[W5P+[)xn9JWH&Ad~t3+1%4i8-?rL9lQ hn84t&}Qf;t7ln?o5!A');
+define('AUTH_KEY',         'u-z@793_;|j+,>CM&{g]p1vJC7OVLJ6?2Ba  l:ct^Z%)9rY;pr-,C;C)O0DE9V6');
+define('SECURE_AUTH_KEY',  '//q0}Ub pr%W/k@2.FM-b=H6$BQ_.>[Ot$_9H(tr}4zRN|i#%#goPc1W%+vgeN!Q');
+define('LOGGED_IN_KEY',    'f=XO/qJO*y}{>!,^g>cUbvZDz~x.^p&A9LB*M1-9+U][G~Sd%^4x8BbKMy5@<udE');
+define('NONCE_KEY',        '?PdAq+1:8q|aT=%<r0Q%sN]1@gN9D!H$WzZ8x<15DLM{n@a+zA9Ob:M<)YTgbEKl');
+define('AUTH_SALT',        '#)(G;;_6q+kdwj.f5N1$As0mrqm<Sl34%WA=fU17JlB *lrkUPk:4m|gD-Q~xnES');
+define('SECURE_AUTH_SALT', '5,a@W+<xo%qF z7% e-A2tD-c`%fEG=}tAMwqVCWv+T.T[-o|JDb~e @HrT+|(yu');
+define('LOGGED_IN_SALT',   'xT!m4fkn-=VQk^RADW_@.0@4mxN7T16mWtsz9Excf5YB-OIZYUR)^ b#:%<Y7&|*');
+define('NONCE_SALT',       'se?v*i+#+WM|kq|ngN?w&dQEv+ogRvuzPe.Xb|rUD.n9MP@--!%,l_a_+#*UBja]');
 
 /**#@-*/
 
@@ -111,19 +93,7 @@ define( 'WP_DEBUG', false );
 
 /* That's all, stop editing! Happy blogging. */
 /**https://developer.wordpress.org/reference/functions/is_ssl/ */
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
-	$_SERVER['HTTPS'] = 'on';
 
-$http_protocol='http://';
-if (!preg_match("/^localhost(:[0-9])*/", $_SERVER['HTTP_HOST']) && !preg_match("/^127\.0\.0\.1(:[0-9])*/", $_SERVER['HTTP_HOST'])) {
-	$http_protocol='https://';
-}
-
-//Relative URLs for swapping across app service deployment slots
-define('WP_HOME', $http_protocol . $_SERVER['HTTP_HOST']);
-define('WP_SITEURL', $http_protocol . $_SERVER['HTTP_HOST']);
-define('WP_CONTENT_URL', '/wp-content');
-define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']);
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
