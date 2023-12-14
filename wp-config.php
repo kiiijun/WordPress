@@ -40,7 +40,7 @@ $connectstr_dbhost = getenv('AZURE_MYSQL_HOST');
 $connectstr_dbname = getenv('AZURE_MYSQL_DBNAME');
 $connectstr_dbusername = getenv('AZURE_MYSQL_USERNAME');
 $connectstr_dbpassword = getenv('AZURE_MYSQL_PASSWORD');
-$connectstr_dbflag = getenv('AZURE_MYSQL_FLAG');
+//$connectstr_dbflag = getenv('AZURE_MYSQL_FLAG');
 
 /** The name of the database for WordPress */
 define('DB_NAME', $connectstr_dbname);
@@ -60,11 +60,11 @@ define( 'DB_CHARSET', 'utf8' );
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
-/** Enabling support for connecting external MYSQL over SSL*/
-$mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
-if (strtolower($mysql_sslconnect) != 'false' && !is_numeric(strpos($connectstr_dbhost, "127.0.0.1")) && !is_numeric(strpos(strtolower($connectstr_dbhost), "localhost"))) {
-	define('MYSQL_CLIENT_FLAGS', $connectstr_dbflag);
-}
+// /** Enabling support for connecting external MYSQL over SSL*/
+// $mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
+// if (strtolower($mysql_sslconnect) != 'false' && !is_numeric(strpos($connectstr_dbhost, "127.0.0.1")) && !is_numeric(strpos(strtolower($connectstr_dbhost), "localhost"))) {
+// 	define('MYSQL_CLIENT_FLAGS', $connectstr_dbflag);
+// }
 
 
 /**#@+
